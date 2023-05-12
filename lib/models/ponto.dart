@@ -30,26 +30,20 @@ class Ponto{
 
 
 
-  // Map<String, dynamic> toMap() => {
-  //   campoId: id == 0 ? null: id,
-  //   campoNome: nome,
-  //   campoDescricao: descricaoo,
-  //   campoDiferenciais: diferenciais,
-  //   campoData:
-  //   dataCadastro == null ? null : DateFormat("yyyy-MM-dd").format(dataCadastro!),
-  //   campoFinalizada: finalizada ? 1 : 0
-  // };
-  //
-  // factory PontoTuristico.fromMap(Map<String, dynamic> map) => PontoTuristico(
-  //   id: map[campoId] is int ? map[campoId] : null,
-  //   descricaoo: map[campoDescricao] is String ? map[campoDescricao] : '',
-  //   diferenciais: map[campoDiferenciais] is String ? map[campoDiferenciais] : '',
-  //   nome: map[campoNome] is String ? map[campoNome] : '',
-  //   dataCadastro: map[campoData] is String
-  //       ? DateFormat("yyyy-MM-dd").parse(map[campoData])
-  //       : null,
-  //   finalizada: map[campoFinalizada] == 1,
-  // );
+  Map<String, dynamic> toMap() => {
+    campoId: id == 0 ? null: id,
+    campoLocalizacao: localizacao,
+    campoDataHora:
+    dataPonto == null ? null : DateFormat("dd/MM/yyyy HH:mm:ss").format(dataPonto!)
+  };
+
+  factory Ponto.fromMap(Map<String, dynamic> map) => Ponto(
+    id: map[campoId] is int ? map[campoId] : null,
+    localizacao: map[campoLocalizacao] is String ? map[campoLocalizacao] : '',
+    dataPonto: map[campoDataHora] is String
+        ? DateFormat("dd/MM/yyyy HH:mm:ss").parse(map[campoDataHora])
+        : null,
+  );
 
 
 

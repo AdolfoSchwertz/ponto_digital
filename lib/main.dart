@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Usando Mapas - MD',
+      title: 'Controle de Ponto - MD',
       theme: ThemeData(
 
         primarySwatch: Colors.blue,
