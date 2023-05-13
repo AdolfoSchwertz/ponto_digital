@@ -134,23 +134,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-    // return ListView.builder(
-    //     itemCount: _pontos.length,
-    //     itemBuilder: (BuildContext context, int index) {
-    //       final ponto = _pontos[index];
-    //       return ListTile(
-    //         title: Text(
-    //           '${ponto.id} - ${ponto.dataPonto}',
-    //
-    //         ),
-    //         subtitle: Text(ponto.localizacao == null
-    //             ? 'Registro sem localizacao'
-    //             : 'Localizacao - ${ponto.localizacao}',
-    //
-    //         ),
-    //       );
-    //     });
-
 
   void _obterLocalizacaoAtual() async {
     bool servicoHabilitado = await _servicoHabilitado();
