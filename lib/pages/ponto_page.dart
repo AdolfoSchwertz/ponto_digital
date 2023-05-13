@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 class HomePage extends StatefulWidget{
   HomePage({Key? key}) : super(key: key);
 
+  @override
   _HomePageState createState() => _HomePageState();
 }
 
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // super.initState();
+     super.initState();
   }
 
   @override
@@ -36,10 +37,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(title: Text('Registro de Pontos')),
       body: _criarBody(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         tooltip: 'Registrar Ponto',
-        child: const Icon(Icons.add),
         onPressed: _obterLocalizacaoAtual,
+        child: const Icon(
+            Icons.access_time_filled_sharp,
+            color: Colors.black87,
+            size: 35.0),
       ),
     );
   }
@@ -86,23 +91,66 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
+
     return ListView.builder(
         itemCount: _pontos.length,
         itemBuilder: (BuildContext context, int index) {
           final ponto = _pontos[index];
           return ListTile(
-            title: Text(
-              '${ponto.id} - ${ponto.dataPonto}',
-
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '${ponto.id} - ${ponto.dataPontoFormatado}',
+                ),
+                ElevatedButton(
+                    onPressed: _abrirCoordenadasNoMapaExterno,
+                    child: Icon(Icons.map,
+                                size: 35.0,
+                                color: Colors.black87,),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(60, 40),
+                    fixedSize: Size(50, 40)
+                  )
+                ),
+              ],
             ),
             subtitle: Text(ponto.localizacao == null
                 ? 'Registro sem localizacao'
                 : 'Localizacao - ${ponto.localizacao}',
 
-            ),
+                       ),
+            onTap: () {
+              final String loc = ponto.localizacao
+                  .replaceAll(", ", " ");
+              MapsLauncher.launchCoordinates(
+                  double.parse(loc.split(" ")[1]
+                      .replaceFirst(",", ".")),
+                  double.parse(loc.split(" ")[3]
+                      .replaceFirst(",", ".")));
+            },
           );
-        });
+        }
+    );
   }
+
+    // return ListView.builder(
+    //     itemCount: _pontos.length,
+    //     itemBuilder: (BuildContext context, int index) {
+    //       final ponto = _pontos[index];
+    //       return ListTile(
+    //         title: Text(
+    //           '${ponto.id} - ${ponto.dataPonto}',
+    //
+    //         ),
+    //         subtitle: Text(ponto.localizacao == null
+    //             ? 'Registro sem localizacao'
+    //             : 'Localizacao - ${ponto.localizacao}',
+    //
+    //         ),
+    //       );
+    //     });
+
 
   void _obterLocalizacaoAtual() async {
     bool servicoHabilitado = await _servicoHabilitado();

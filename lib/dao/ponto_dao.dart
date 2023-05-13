@@ -7,7 +7,7 @@ class PontoDao {
   Future<bool> salvar(Ponto ponto) async {
     final database = await databaseProvider.database;
     final valores = ponto.toMap();
-    if (ponto.id == 0) {
+    if (ponto.id == null) {
       ponto.id = await database.insert(Ponto.nomeTabela, valores);
       return true;
     } else {
@@ -20,6 +20,8 @@ class PontoDao {
       return registrosAtualizados > 0;
     }
   }
+
+
 
 
   Future<List<Ponto>> listar() async {

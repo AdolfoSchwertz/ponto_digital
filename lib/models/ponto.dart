@@ -19,19 +19,19 @@ class Ponto{
     required this.localizacao,
     this.dataPonto});
 
-  String get dataCadastroFormatado{
-    // if (horaCadastro == null){
+  String get dataPontoFormatado{
+    // if (dataPonto == null){
     //   return ' ';
     // }
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('dd/MM/yyyy').format(now);
+    String formattedDate = DateFormat('dd/MM/yyyy HH:mm:ss').format(dataPonto!);
     return formattedDate;
   }
 
 
 
   Map<String, dynamic> toMap() => {
-    campoId: id == 0 ? null: id,
+  //  campoId: id == 0 ? null: id,
     campoLocalizacao: localizacao,
     campoDataHora:
     dataPonto == null ? null : DateFormat("dd/MM/yyyy HH:mm:ss").format(dataPonto!)
